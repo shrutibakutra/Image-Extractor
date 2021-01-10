@@ -4,14 +4,17 @@ from PIL import Image, ImageOps
 import sys
 import datetime
 import json
+import os
 
-# filename = sys.argv[0]
-
-filename = open(r'./HZZWeekly_16thOct_Jay.pptx','rb')
+filename= sys.argv[1]
 
 n=0
 files = []
 comments = []
+
+ # create directory to store extracted images
+path = './Images_'+filename
+os.makedirs(path)
 
 def write_image(shape):
     global n
@@ -23,7 +26,9 @@ def write_image(shape):
     timestamp = str(now.strftime("%Y%m%d_%H-%M-%S"))
 
     imagepost = str(n) + str(timestamp)   
-    image_filename = './Images/image{}_{}'.format(imagepost, image.ext)
+   
+
+    image_filename = path+'/image{}_{}'.format(imagepost, image.ext)
     image_filename_round = './Images/round_image_' + imagepost +'.png' 
     image_filename_square = './Images/square_image_{}_{}'.format(imagepost, image.ext)    
     image_filename = image_filename + '.'+image.ext
